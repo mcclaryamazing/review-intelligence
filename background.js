@@ -6,6 +6,10 @@ const MARKETPLACES = Object.freeze({
   "amazon.de": Object.freeze({
     origin: "https://www.amazon.de",
     country: "DE"
+  }),
+  "amazon.com.au": Object.freeze({
+    origin: "https://www.amazon.com.au",
+    country: "AU"
   })
 });
 const DEFAULT_FILTERS = {
@@ -152,7 +156,7 @@ function normalizeMarketplace(rawMarketplace, productPageData) {
   const config = MARKETPLACES[domain];
 
   if (!config) {
-    throw new Error("Open an Amazon.com or Amazon.de product page before starting the export.");
+    throw new Error("Open an Amazon.com, Amazon.de, or Amazon.com.au product page before starting the export.");
   }
 
   const explicitPrefix = normalizeReviewPathPrefix(

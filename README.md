@@ -1,6 +1,6 @@
 # Product Review Intelligence
 
-A local-only Chrome extension for Amazon.com and Amazon.de that captures Amazon's available **Customers say** insights, opens the selected reviews view for the ASIN on the active product page, cautiously loads each additional review batch, and downloads one ZIP containing a detailed data guide plus five related UTF-8 CSV files. Optional product-detail capture can add the product's demand, price, listing-gallery image URLs and resized JPEG files, attributes, bullets, and information tables.
+A local-only Chrome extension for Amazon.com, Amazon.de, and Amazon.com.au that captures Amazon's available **Customers say** insights, opens the selected reviews view for the ASIN on the active product page, cautiously loads each additional review batch, and downloads one ZIP containing a detailed data guide plus five related UTF-8 CSV files. Optional product-detail capture can add the product's demand, price, listing-gallery image URLs and resized JPEG files, attributes, bullets, and information tables.
 
 ## Install
 
@@ -105,7 +105,7 @@ The finished icons are included in the extension folder, so no icon generator is
 
 ## Export files
 
-Each download is a uniquely named ZIP containing one folder with a detailed `README.md`, five normalized CSV files, and optional listing gallery JPEGs when **Capture product details** was selected. The ZIP and its internal folder use the same short format, `prod-int-export-BRAND-ASIN-YYYYMMDDTHHMMSS`, with the timestamp recorded in UTC. For example: `prod-int-export-M-and-Ms-B097XHFP8T-20260726T150933.zip`. The brand is captured from the Amazon product page and converted to a filename-safe token. If no usable brand is available, the export keeps the prior `prod-int-export-ASIN-YYYYMMDDTHHMMSS` format. Every CSV includes `marketplace_domain`, `marketplace_country`, `page_language`, `asin`, and `exported_at_utc` so Amazon.com and Amazon.de data can be joined without repeating product-level information or conflating marketplace-specific listings.
+Each download is a uniquely named ZIP containing one folder with a detailed `README.md`, five normalized CSV files, and optional listing gallery JPEGs when **Capture product details** was selected. The ZIP and its internal folder use the same short format, `prod-int-export-BRAND-ASIN-YYYYMMDDTHHMMSS`, with the timestamp recorded in UTC. For example: `prod-int-export-M-and-Ms-B097XHFP8T-20260726T150933.zip`. The brand is captured from the Amazon product page and converted to a filename-safe token. If no usable brand is available, the export keeps the prior `prod-int-export-ASIN-YYYYMMDDTHHMMSS` format. Every CSV includes `marketplace_domain`, `marketplace_country`, `page_language`, `asin`, and `exported_at_utc` so Amazon.com, Amazon.de, and Amazon.com.au data can be joined without repeating product-level information or conflating marketplace-specific listings.
 
 - `README.md` explains the archive's relationships, parsing rules, recommended AI/analytics import behavior, missing-data conventions, limitations, and every column in every CSV. It also records the ASIN, export timestamp, collection stop reason, and export schema version for that run.
 
@@ -151,7 +151,7 @@ service. See [LICENSE.md](LICENSE.md) for the complete terms.
 
 ## Current scope
 
-- Amazon.com and Amazon.de product and customer-reviews pages.
+- Amazon.com, Amazon.de, and Amazon.com.au product and customer-reviews pages.
 - Amazon.de source text in Amazon's active English or German display language.
 - User-selectable top, most-recent, or combined two-pass sorting.
 - User-selectable reviewer, rating, and media filters.

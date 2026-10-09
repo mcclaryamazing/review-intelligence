@@ -1096,7 +1096,7 @@
       `- Collection stop reason: ${stopReason}`,
       "- Export schema version: 1.7",
       "",
-      "The ASIN is Amazon's 10-character product identifier within a marketplace. The marketplace_domain and exported_at_utc values identify the marketplace and collection run. Every CSV schema includes these provenance columns so records from Amazon.com and Amazon.de can be stored together without conflating marketplace-specific listings or reviews.",
+      "The ASIN is Amazon's 10-character product identifier within a marketplace. The marketplace_domain and exported_at_utc values identify the marketplace and collection run. Every CSV schema includes these provenance columns so records from Amazon.com, Amazon.de, and Amazon.com.au can be stored together without conflating marketplace-specific listings or reviews.",
       "",
       "## Critical interpretation note for The Full Monty",
       "",
@@ -1165,8 +1165,8 @@
       "| Column | Meaning | Type or format |",
       "| --- | --- | --- |",
       "| asin | Amazon product identifier. | Text, normally 10 uppercase letters/digits. |",
-      "| marketplace_domain | Amazon marketplace from which the data was captured. | amazon.com or amazon.de. |",
-      "| marketplace_country | Normalized marketplace country code. | US or DE. |",
+      "| marketplace_domain | Amazon marketplace from which the data was captured. | amazon.com, amazon.de, or amazon.com.au. |",
+      "| marketplace_country | Normalized marketplace country code. | US, DE, or AU. |",
       "| page_language | Language detected from Amazon's locale route or page markup. Source text remains in this language. | Usually en or de; may be blank if unavailable. |",
       "| review_id | Amazon review ID; a fallback- ID is generated when Amazon does not expose one. Unique within this export. | Text. |",
       "| review_url | Absolute URL to the individual Amazon review when available. | URL text or blank. |",
@@ -1199,8 +1199,8 @@
       "| Column | Meaning | Type or format |",
       "| --- | --- | --- |",
       "| asin | Amazon product identifier. | Text. |",
-      "| marketplace_domain | Amazon marketplace for this product snapshot. | amazon.com or amazon.de. |",
-      "| marketplace_country | Normalized marketplace country code. | US or DE. |",
+      "| marketplace_domain | Amazon marketplace for this product snapshot. | amazon.com, amazon.de, or amazon.com.au. |",
+      "| marketplace_country | Normalized marketplace country code. | US, DE, or AU. |",
       "| page_language | Language in which the product page was displayed. | Usually en or de; may be blank. |",
       "| product_title | Product title captured from the product page or review-page heading. | Text or blank. |",
       "| product_price | Primary displayed price for the selected offer/variant at capture time. Currency is not normalized separately. | Display text, Not available, or blank when details were not requested. |",
@@ -1231,8 +1231,8 @@
       "| Column | Meaning | Type or format |",
       "| --- | --- | --- |",
       "| asin | Amazon product identifier. | Text. |",
-      "| marketplace_domain | Amazon marketplace for the detail row. | amazon.com or amazon.de. |",
-      "| marketplace_country | Normalized marketplace country code. | US or DE. |",
+      "| marketplace_domain | Amazon marketplace for the detail row. | amazon.com, amazon.de, or amazon.com.au. |",
+      "| marketplace_country | Normalized marketplace country code. | US, DE, or AU. |",
       "| page_language | Language of the captured field label and value. | Usually en or de; may be blank. |",
       "| section | Source category for the row. | Product image, Product attribute, About this item, or Product information. |",
       "| field | Detail label. Product image rows distinguish the first primary/gallery URL from later gallery URLs; About this item rows use Bullet point. | Text. |",
@@ -1247,8 +1247,8 @@
       "| Column | Meaning | Type or format |",
       "| --- | --- | --- |",
       "| asin | Amazon product identifier. | Text. |",
-      "| marketplace_domain | Amazon marketplace for the Customers say topic. | amazon.com or amazon.de. |",
-      "| marketplace_country | Normalized marketplace country code. | US or DE. |",
+      "| marketplace_domain | Amazon marketplace for the Customers say topic. | amazon.com, amazon.de, or amazon.com.au. |",
+      "| marketplace_country | Normalized marketplace country code. | US, DE, or AU. |",
       "| page_language | Language of the captured topic and summary. | Usually en or de; may be blank. |",
       "| topic | Displayed feedback topic, such as Brightness or Quality. | Text. |",
       "| mention_count | Number of customers Amazon says mention the topic. | Integer or blank. |",
@@ -1265,8 +1265,8 @@
       "| Column | Meaning | Type or format |",
       "| --- | --- | --- |",
       "| asin | Amazon product identifier. | Text. |",
-      "| marketplace_domain | Amazon marketplace for the excerpt. | amazon.com or amazon.de. |",
-      "| marketplace_country | Normalized marketplace country code. | US or DE. |",
+      "| marketplace_domain | Amazon marketplace for the excerpt. | amazon.com, amazon.de, or amazon.com.au. |",
+      "| marketplace_country | Normalized marketplace country code. | US, DE, or AU. |",
       "| page_language | Language of the captured excerpt. | Usually en or de; may be blank. |",
       "| topic | Customers say topic associated with the excerpt. | Text. |",
       "| review_id | Amazon review ID parsed from the excerpt's link when available. | Text or blank. |",
@@ -1463,13 +1463,14 @@
 
     return {
       marketplace_domain: marketplaceDomain,
-      marketplace_country: marketplaceDomain === "amazon.de" ? "DE" : "US",
+      marketplace_country: marketplaceDomain === "amazon.com.au" ? "AU" : marketplaceDomain === "amazon.de" ? "DE" : "US",
       page_language: pageLanguage
     };
   }
 
   function normalizeMarketplaceDomain(value) {
     const hostname = String(value || "").toLowerCase();
+    if (hostname === "amazon.com.au" || hostname.endsWith(".amazon.com.au")) return "amazon.com.au";
     if (hostname === "amazon.de" || hostname.endsWith(".amazon.de")) return "amazon.de";
     if (hostname === "amazon.com" || hostname.endsWith(".amazon.com")) return "amazon.com";
     return "";

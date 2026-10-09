@@ -415,7 +415,9 @@
 
   function captureMarketplace() {
     const hostname = location.hostname.toLowerCase();
-    const marketplaceDomain = hostname === "amazon.de" || hostname.endsWith(".amazon.de")
+    const marketplaceDomain = hostname === "amazon.com.au" || hostname.endsWith(".amazon.com.au")
+      ? "amazon.com.au"
+      : hostname === "amazon.de" || hostname.endsWith(".amazon.de")
       ? "amazon.de"
       : "amazon.com";
     const localeMatch = location.pathname.match(/^\/-\/([a-z]{2}(?:-[a-z]{2})?)(?:\/|$)/i);
@@ -444,7 +446,7 @@
 
     return {
       marketplaceDomain,
-      marketplaceCountry: marketplaceDomain === "amazon.de" ? "DE" : "US",
+      marketplaceCountry: marketplaceDomain === "amazon.com.au" ? "AU" : marketplaceDomain === "amazon.de" ? "DE" : "US",
       pageLanguage,
       reviewPathPrefix
     };

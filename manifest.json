@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Product Review Intelligence",
   "description": "Expand and view all visible reviews.",
-  "version": "1.8.5",
+  "version": "1.8.6",
   "permissions": [
     "downloads",
     "storage",
@@ -12,6 +12,7 @@
   "host_permissions": [
     "https://*.amazon.com/*",
     "https://*.amazon.de/*",
+    "https://*.amazon.com.au/*",
     "https://*.media-amazon.com/*",
     "https://*.ssl-images-amazon.com/*"
   ],
@@ -37,7 +38,8 @@
     {
       "matches": [
         "https://*.amazon.com/*",
-        "https://*.amazon.de/*"
+        "https://*.amazon.de/*",
+        "https://*.amazon.com.au/*"
       ],
       "js": [
         "product-data.js"
@@ -47,7 +49,8 @@
     {
       "matches": [
         "https://*.amazon.com/*",
-        "https://*.amazon.de/*"
+        "https://*.amazon.de/*",
+        "https://*.amazon.com.au/*"
       ],
       "js": [
         "dedupe.js",

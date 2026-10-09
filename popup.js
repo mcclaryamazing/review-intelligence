@@ -47,7 +47,7 @@ async function initialize() {
     activeAsin = activeMarketplace?.asin || null;
 
     if (!activeAsin) {
-      setUnavailable("Open an Amazon.com or Amazon.de product or reviews page first.");
+      setUnavailable("Open an Amazon.com, Amazon.de, or Amazon.com.au product or reviews page first.");
       return;
     }
 
@@ -200,7 +200,7 @@ function getAmazonProductContext(rawUrl) {
     return {
       asin: match[1].toUpperCase(),
       marketplaceDomain,
-      marketplaceCountry: marketplaceDomain === "amazon.de" ? "DE" : "US",
+      marketplaceCountry: marketplaceDomain === "amazon.com.au" ? "AU" : marketplaceDomain === "amazon.de" ? "DE" : "US",
       pageLanguage: localeMatch?.[1]?.toLowerCase() || "",
       reviewPathPrefix: localeMatch ? `/-/${localeMatch[1].toLowerCase()}` : ""
     };
@@ -210,6 +210,7 @@ function getAmazonProductContext(rawUrl) {
 }
 
 function getMarketplaceDomain(hostname) {
+  if (hostname === "amazon.com.au" || hostname.endsWith(".amazon.com.au")) return "amazon.com.au";
   if (hostname === "amazon.com" || hostname.endsWith(".amazon.com")) return "amazon.com";
   if (hostname === "amazon.de" || hostname.endsWith(".amazon.de")) return "amazon.de";
   return "";

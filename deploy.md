@@ -47,6 +47,7 @@ Before changing, reloading, or packaging the extension:
 19. Run **Both** and confirm it completes Most recent first, starts Top reviews without an intermediate download, and downloads one `-both-` ZIP after the second pass.
 20. Confirm `reviews.csv` has one row per `review_id`, `sort` is `Both`, and `discovered_in_sort` records the contributing sort view or views.
 21. On Amazon.de, confirm the popup detects the ASIN, the review tab remains on Amazon.de, the active locale prefix is preserved, and every CSV records `amazon.de`, `DE`, and the detected page language.
+    On Amazon.com.au, test product and reviews URLs (including `/gp/aw/d/ASIN`), confirm every review pass stays on Amazon.com.au, and verify every populated CSV records `amazon.com.au`, `AU`, and the detected page language.
 22. If Amazon redirects the export tab to sign-in, verify the panel says sign-in is required and the pending export resumes after Amazon returns to the review URL.
 23. For an inline `Customer reviews require account verification` state, verify a header-only `reviews.csv` preserves the other datasets and records `Account verification required`, `0`, the access message, and the stop reason in `product.csv`.
 24. Verify **Both** does not start another pass after account verification blocks the first pass; if verification blocks the second pass, verify the first-pass reviews remain in the export.
